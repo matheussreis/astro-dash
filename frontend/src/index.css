@@ -128,3 +128,13 @@
     @apply font-sans;
   }
 }
+
+@font-face {
+  font-family: 'LexendVariable';
+  src: url('./assets/fonts/Lexend-VariableFont_wght.ttf');
+  font-weight: 100 900;
+}
+
+@utility font-lexend {
+  font-family: 'LexendVariable', sans-serif;
+}
