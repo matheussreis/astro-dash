@@ -1,12 +1,17 @@
 import type { Request, Response } from 'express';
+import type { Validator } from '../validators/types.js';
 
 export default class FeedController {
+  constructor(private validator: Validator) {}
+
   async get(req: Request, res: Response) {
     const date = req?.query.date ?? null;
 
-    if (date === null) {
-      return res.status(500).json({
-        message: 'No Date Provided!',
+    const result = this.validator.validate({ date });
+
+    if (!result.valid) {
+      return res.status(result.code).json({
+        message: result.message,
       });
     }
 

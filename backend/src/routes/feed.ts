@@ -5,6 +5,6 @@ const router = express.Router();
 
 const controller = makeFeedController();
 
-router.get('/', controller.get);
+router.get('/', (req, res) => controller.get(req, res));
 
 export default router;

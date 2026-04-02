@@ -1,5 +1,7 @@
 import FeedController from '../controllers/feed.js';
+import FeedValidator from '../validators/feed.js';
 
 export function makeFeedController() {
-  return new FeedController();
+  const validator = new FeedValidator();
+  return new FeedController(validator);
 }
