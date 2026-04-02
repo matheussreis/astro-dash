@@ -4,8 +4,8 @@ export interface Neo {
 
 export interface NeoItem {
   name: string;
-  is_hazardous: boolean;
-  absolute_magnitude: number;
+  isHazardous: boolean;
+  absoluteMagnitude: number;
   velocity: number;
   diameter: {
     min: number;
