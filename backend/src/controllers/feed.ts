@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import type { Validator } from '../validators/types.js';
+import type { Validator } from '../types/index.js';
 
 export default class FeedController {
   constructor(private validator: Validator) {}

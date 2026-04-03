@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import type { Validator, ValidatorResponse } from './types.js';
+import type { Validator, ValidatorResponse } from '../types/index.js';
 
 const feedSchema = z.object({
   date: z.coerce
