@@ -1,7 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import { FeedRouter } from './routes/index.js';
-import { limiter } from './utils/rate-limit.js';
+import { limiter } from './middleware/rate-limit.js';
 import { corsErrorHandler, corsMiddleware } from './middleware/cors.js';
 
 const app = express();

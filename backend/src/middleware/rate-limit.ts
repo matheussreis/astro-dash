@@ -1,4 +1,4 @@
-import logger from './logger.js';
+import logger from '../utils/logger.js';
 import rateLimit from 'express-rate-limit';
 import type { Request, Response } from 'express';
 
