@@ -24,7 +24,7 @@ export class NeoService implements ApiService<Neo> {
       baseUrl: this.config.baseUrl,
       pathSegments: [this.config.endpoint],
       queryParams: {
-        api_key: this.config.apiKey!,
+        api_key: this.config.apiKey,
         start_date: date,
         end_date: date,
       },

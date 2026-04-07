@@ -23,12 +23,14 @@ export class ApodService implements ApiService<Apod> {
       baseUrl: this.config.baseUrl,
       pathSegments: [this.config.endpoint],
       queryParams: {
-        api_key: this.config.apiKey!,
+        api_key: this.config.apiKey,
         date,
       },
     });
 
     const data = await this.apiClient.get<Apod>(url);
+
+    logger.info(`APOD API request successful for date: ${date}`);
 
     return this.mapper.mapTo(data);
   }

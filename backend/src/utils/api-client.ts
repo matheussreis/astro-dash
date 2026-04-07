@@ -29,6 +29,7 @@ export class ApiClient implements HttpClient {
     logger.error(
       `Request failed: ${response.statusText} (status: ${response.status})`,
     );
+
     throw new Error(response.statusText, { cause: response.status });
   }
 
