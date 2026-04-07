@@ -1,20 +1,34 @@
+import type { Feed } from '../models/index.js';
 import type { Request, Response } from 'express';
-import type { Validator } from '../types/index.js';
+import type { ApiService, Controller, Validator } from '../types/index.js';
 
-export default class FeedController {
-  constructor(private validator: Validator) {}
+export class FeedController implements Controller<Feed> {
+  constructor(
+    private validator: Validator,
+    private service: ApiService<Feed>,
+  ) {}
 
   async get(req: Request, res: Response) {
-    const date = req?.query.date ?? null;
+    try {
+      const date = req?.query.date ?? null;
 
-    const result = this.validator.validate({ date });
+      const result = this.validator.validate({ date });
 
-    if (!result.valid) {
-      return res.status(result.code).json({
-        message: result.message,
+      if (!result.valid) {
+        res.status(result.code).json({
+          message: result.message,
+        });
+
+        return;
+      }
+
+      const feed = await this.service.retrieve(date);
+
+      res.status(200).json({ feed });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Error retrieving feed data',
       });
     }
-
-    res.status(200).json({ date });
   }
 }

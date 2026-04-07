@@ -1,11 +1,9 @@
-export interface Neo {
-  items: NeoItem[];
-}
+export type Neo = NeoItem[];
 
 export interface NeoItem {
-  name: string;
+  title: string;
   isHazardous: boolean;
-  absoluteMagnitude: number;
+  magnitude: number;
   velocity: number;
   diameter: {
     min: number;

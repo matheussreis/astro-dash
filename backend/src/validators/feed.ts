@@ -17,7 +17,7 @@ const feedSchema = z.object({
     }),
 });
 
-export default class FeedValidator implements Validator {
+export class FeedValidator implements Validator {
   validate(date: Date): ValidatorResponse {
     const result = feedSchema.safeParse(date);
     const isValid = result.success === true;
