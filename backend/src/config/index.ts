@@ -1,24 +1,34 @@
-import type { ClientConfig, NasaConfig } from '../types/index.js';
+import type { ClientConfig, NasaConfig, ServerConfig } from '../types/index.js';
 
-const nasaBaseURL = process.env.NASA_BASE_URL!;
-const nasaApiKey = process.env.NASA_API_KEY!;
-const clientURL = process.env.CLIENT_URL!;
+function requireEnv(key: string): string {
+  const value = process.env[key];
+
+  if (!value) {
+    throw new Error(`Missing required env variable: ${key}`);
+  }
+
+  return value;
+}
 
 const baseNasaConfig = {
-  baseUrl: nasaBaseURL,
-  apiKey: nasaApiKey,
+  baseUrl: requireEnv('NASA_BASE_URL'),
+  apiKey: requireEnv('NASA_API_KEY'),
 };
 
 export const apodConfig: NasaConfig = {
   ...baseNasaConfig,
-  endpoint: process.env.NASA_APOD_ENDPOINT!,
+  endpoint: requireEnv('NASA_APOD_ENDPOINT'),
 };
 
 export const neoConfig: NasaConfig = {
   ...baseNasaConfig,
-  endpoint: process.env.NASA_NEO_ENDPOINT!,
+  endpoint: requireEnv('NASA_NEO_ENDPOINT'),
 };
 
 export const clientConfig: ClientConfig = {
-  url: clientURL,
+  url: requireEnv('CLIENT_URL'),
+};
+
+export const serverConfig: ServerConfig = {
+  port: requireEnv('PORT'),
 };

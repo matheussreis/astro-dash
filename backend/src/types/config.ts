@@ -7,3 +7,7 @@ export type NasaConfig = {
 export type ClientConfig = {
   url: string;
 };
+
+export type ServerConfig = {
+  port: string;
+};

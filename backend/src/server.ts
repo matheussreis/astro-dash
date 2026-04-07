@@ -1,9 +1,18 @@
 import 'dotenv/config';
-import app from './app.js';
 import logger from './utils/logger.js';
 
-const PORT = process.env.PORT || 3001;
+async function start() {
+  try {
+    const { default: app } = await import('./app.js');
+    const { serverConfig } = await import('./config/index.js');
 
-app.listen(PORT, () => {
-  logger.info(`Server started on http://localhost:${PORT}`);
-});
+    app.listen(serverConfig.port, () => {
+      logger.info(`Server started on port: ${serverConfig.port}`);
+    });
+  } catch (error) {
+    logger.error('Error starting server ->', error);
+    process.exit(1);
+  }
+}
+
+start();
