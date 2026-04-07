@@ -1,7 +1,11 @@
+import { toast } from 'sonner';
 import { useState } from 'react';
 import DatePicker from './DatePicker';
 import { Button } from './ui/Button';
 import { Rocket } from 'lucide-react';
+import { Toaster } from './ui/Sonner';
+
+const apiUrl = import.meta.env.VITE_SERVER_URL;
 
 function Heading() {
   return (
@@ -36,13 +40,31 @@ function ExploreButton({ onClick }: { onClick: () => void }) {
 export default function HeroSection() {
   const [date, setDate] = useState<Date>(new Date());
 
-  const handleExploreButtonClick = () => {
-    // Call API and get results...
-    console.log('Button Clicked');
+  const handleExploreButtonClick = async () => {
+    const parsedDate = date.toISOString().substring(0, 10);
+    const url = apiUrl + '/api/feed?date=' + parsedDate;
+
+    toast.promise(
+      fetch(url).then(async (res) => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch feed data');
+        }
+        return await res.json();
+      }),
+      {
+        loading: 'Loading feed data...',
+        success: (data) => {
+          console.log(data);
+          return 'Feed data loaded successfully!';
+        },
+        error: (err) => `Error: ${err.message}`,
+      },
+    );
   };
 
   return (
     <section className="flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6">
+      <Toaster />
       <Heading />
       <DatePicker value={date} onChange={(value: Date) => setDate(value)} />
       <ExploreButton onClick={handleExploreButtonClick} />
