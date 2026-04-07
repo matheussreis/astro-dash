@@ -7,3 +7,7 @@ export interface UrlParserParams {
 export interface UrlParser {
   parse(params: UrlParserParams): string;
 }
+
+export interface HttpClient {
+  get<T>(url: string): Promise<T>;
+}

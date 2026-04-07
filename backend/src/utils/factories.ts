@@ -1,3 +1,4 @@
+import { ApiClient } from './api-client.js';
 import { FeedValidator } from '../validators/index.js';
 import { FeedController } from '../controllers/index.js';
 import { SimpleUrlParser } from './simple-url-parser.js';
@@ -21,16 +22,22 @@ export function makeNeoMapper() {
   return new NeoMapper();
 }
 
+export function makeApiClient() {
+  return new ApiClient();
+}
+
 export function makeApodService() {
   const urlParser = makeUrlParser();
   const dataMapper = makeApodMapper();
-  return new ApodService(apodConfig, urlParser, dataMapper);
+  const apiClient = makeApiClient();
+  return new ApodService(apodConfig, urlParser, dataMapper, apiClient);
 }
 
 export function makeNeoService() {
   const urlParser = makeUrlParser();
   const dataMapper = makeNeoMapper();
-  return new NeoService(neoConfig, urlParser, dataMapper);
+  const apiClient = makeApiClient();
+  return new NeoService(neoConfig, urlParser, dataMapper, apiClient);
 }
 
 export function makeFeedService() {

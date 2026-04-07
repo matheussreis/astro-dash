@@ -1,7 +1,9 @@
 import type {
   ApiService,
   DataMapper,
+  HttpClient,
   NasaConfig,
+  NeoRawData,
   UrlParser,
 } from '../types/index.js';
 import type { Neo } from '../models/index.js';
@@ -12,6 +14,7 @@ export class NeoService implements ApiService<Neo> {
     private config: NasaConfig,
     private urlParser: UrlParser,
     private mapper: DataMapper<Neo>,
+    private apiClient: HttpClient,
   ) {}
 
   async retrieve(date: string): Promise<Neo> {
@@ -27,19 +30,12 @@ export class NeoService implements ApiService<Neo> {
       },
     });
 
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      logger.error(
-        `NEO API request failed: ${response.statusText} (status: ${response.status})`,
-      );
-
-      throw new Error(response.statusText, { cause: response.status });
-    }
+    const data = await this.apiClient.get<{
+      near_earth_objects: Record<string, NeoRawData>;
+    }>(url);
 
     logger.info(`NEO API request successful for date: ${date}`);
 
-    const data = await response.json();
     const neoItems = data.near_earth_objects[date];
     if (!Array.isArray(neoItems)) {
       const message = `No NEO data found for date: ${date}`;

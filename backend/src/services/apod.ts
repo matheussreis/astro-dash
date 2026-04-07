@@ -1,6 +1,7 @@
 import type {
   ApiService,
   DataMapper,
+  HttpClient,
   NasaConfig,
   UrlParser,
 } from '../types/index.js';
@@ -12,6 +13,7 @@ export class ApodService implements ApiService<Apod> {
     private config: NasaConfig,
     private urlParser: UrlParser,
     private mapper: DataMapper<Apod>,
+    private apiClient: HttpClient,
   ) {}
 
   async retrieve(date: string): Promise<Apod> {
@@ -26,19 +28,7 @@ export class ApodService implements ApiService<Apod> {
       },
     });
 
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      logger.error(
-        `APOD API request failed: ${response.statusText} (status: ${response.status})`,
-      );
-
-      throw new Error(response.statusText, { cause: response.status });
-    }
-
-    logger.info(`APOD API request successful for date: ${date}`);
-
-    const data = await response.json();
+    const data = await this.apiClient.get<Apod>(url);
 
     return this.mapper.mapTo(data);
   }
