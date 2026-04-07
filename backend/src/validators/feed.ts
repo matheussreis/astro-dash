@@ -1,20 +1,27 @@
 import * as z from 'zod';
 import type { Validator, ValidatorResponse } from '../types/index.js';
 
-const feedSchema = z.object({
-  date: z.coerce
-    .date({
-      error: (iss) => {
-        if (iss.code === 'invalid_type') {
-          return 'Value must be a date (YYYY-MM-dd)';
-        }
+const normaliseEmptyValue = (val: any) => {
+  return val === '' || val === null || val === undefined ? undefined : val;
+};
 
-        return 'Invalid date';
-      },
-    })
-    .refine((d) => d <= new Date(), {
-      message: 'Date cannot be in the future',
-    }),
+const feedSchema = z.object({
+  date: z.preprocess(
+    normaliseEmptyValue,
+    z.coerce
+      .date({
+        error: (iss) => {
+          if (iss.code === 'invalid_type') {
+            return 'Value must be a date (YYYY-MM-dd)';
+          }
+
+          return 'Invalid date';
+        },
+      })
+      .refine((d) => d <= new Date(), {
+        message: 'Date cannot be in the future',
+      }),
+  ),
 });
 
 export class FeedValidator implements Validator {
