@@ -1,10 +1,11 @@
 import { toast } from 'sonner';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import DatePicker from './DatePicker';
 import { Button } from './ui/Button';
 import { Rocket } from 'lucide-react';
 import { Toaster } from './ui/Sonner';
 import type { LoadFeedFunction } from '@/context/feed/types';
+import { useScroll } from '@/hooks/use-scroll';
 
 function Heading() {
   return (
@@ -42,17 +43,28 @@ interface HeroSectionProps {
 
 export default function HeroSection({ loadFeed }: HeroSectionProps) {
   const [date, setDate] = useState<Date>(new Date());
+  const sectionRef = useRef<HTMLElement>(null);
+  const scrolltoSection = useScroll({ ref: sectionRef });
 
   const handleExploreButtonClick = async () => {
-    toast.promise(async () => await loadFeed(date), {
-      loading: 'Loading feed data...',
-      success: 'Feed data loaded successfully!',
-      error: (err) => `Error: ${err.message}`,
-    });
+    toast.promise(
+      async () => {
+        await loadFeed(date);
+        scrolltoSection();
+      },
+      {
+        loading: 'Loading feed data...',
+        success: 'Feed data loaded successfully!',
+        error: (err) => `Error: ${err.message}`,
+      },
+    );
   };
 
   return (
-    <section className="flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6">
+    <section
+      ref={sectionRef}
+      className="flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6"
+    >
       <Toaster />
       <Heading />
       <DatePicker value={date} onChange={(value: Date) => setDate(value)} />
