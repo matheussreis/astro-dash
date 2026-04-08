@@ -1,5 +1,5 @@
-import { useFeed } from './context/feed';
 import Navbar from './components/Navbar';
+import { useFeed } from '@/hooks/use-feed';
 import HeroSection from './components/HeroSection';
 import ApodSection from './components/ApodSection';
 

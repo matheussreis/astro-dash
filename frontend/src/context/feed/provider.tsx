@@ -1,35 +1,10 @@
-import { findCachedFeed, setCachedFeed } from '@/lib/cache';
+import { useState } from 'react';
+import type { Feed } from '@/models/feed';
 import { getDatabaseDate } from '@/lib/formatters';
-import type { Feed } from '@/models';
-import { createContext, useContext, useState } from 'react';
+import { defaultValue, FeedContext } from './context';
+import { findCachedFeed, setCachedFeed } from '@/lib/cache';
 
 const apiUrl = import.meta.env.VITE_SERVER_URL;
-
-export type LoadFeedFunction = (date: Date) => Promise<void>;
-
-export type FeedContextType = {
-  feed: Feed;
-  load: LoadFeedFunction;
-};
-
-export const defaultValue: Feed = {
-  date: '',
-  items: {
-    apod: null,
-    neo: null,
-  },
-};
-
-const defaultContextValue: FeedContextType = {
-  feed: defaultValue,
-  load: async () => {},
-};
-
-export const FeedContext = createContext<FeedContextType>(defaultContextValue);
-
-export function useFeed() {
-  return useContext(FeedContext);
-}
 
 export function FeedProvider({ children }: { children: React.ReactNode }) {
   const [feed, setFeed] = useState<Feed>(defaultValue);

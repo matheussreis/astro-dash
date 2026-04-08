@@ -4,7 +4,7 @@ import DatePicker from './DatePicker';
 import { Button } from './ui/Button';
 import { Rocket } from 'lucide-react';
 import { Toaster } from './ui/Sonner';
-import type { LoadFeedFunction } from '@/context/feed';
+import type { LoadFeedFunction } from '@/context/feed/types';
 
 function Heading() {
   return (
