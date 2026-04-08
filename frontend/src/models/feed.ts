@@ -7,6 +7,6 @@ export interface FeedRegistry {
 }
 
 export interface Feed {
-  date: Date;
+  date: string;
   items: FeedRegistry;
 }

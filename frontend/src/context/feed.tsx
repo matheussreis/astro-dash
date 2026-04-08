@@ -1,3 +1,5 @@
+import { findCachedFeed, setCachedFeed } from '@/lib/cache';
+import { getDatabaseDate } from '@/lib/formatters';
 import type { Feed } from '@/models';
 import { createContext, useContext, useState } from 'react';
 
@@ -11,7 +13,7 @@ export type FeedContextType = {
 };
 
 export const defaultValue: Feed = {
-  date: new Date(),
+  date: '',
   items: {
     apod: null,
     neo: null,
@@ -33,9 +35,18 @@ export function FeedProvider({ children }: { children: React.ReactNode }) {
   const [feed, setFeed] = useState<Feed>(defaultValue);
 
   const loadFeed = async (date: Date) => {
-    const parsedDate = date.toISOString().substring(0, 10);
-    const url = apiUrl + '/api/feed?date=' + parsedDate;
+    const parsedDate = getDatabaseDate(date);
+    if (!parsedDate) {
+      throw new Error('Invalid date provided');
+    }
 
+    const cached = findCachedFeed(parsedDate);
+    if (cached) {
+      setFeed(cached);
+      return;
+    }
+
+    const url = apiUrl + '/api/feed?date=' + parsedDate;
     const res = await fetch(url);
 
     if (!res.ok) {
@@ -44,7 +55,9 @@ export function FeedProvider({ children }: { children: React.ReactNode }) {
 
     const response = await res.json();
     const data: Feed = response.feed;
+
     setFeed(data);
+    setCachedFeed(data);
   };
 
   return (
