@@ -37,6 +37,7 @@ export default function DatePicker({ value, onChange }: DatePickerProps) {
       <PopoverContent className="w-auto p-0" align="center">
         <Calendar
           mode="single"
+          timeZone="UTC"
           selected={value}
           onSelect={(newDate) => newDate && onChange(newDate)}
           autoFocus

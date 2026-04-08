@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { ThemeProvider } from './components/ThemeProvider.tsx';
+import { FeedProvider } from './context/feed';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider defaultTheme="dark" storageKey="astro-dash-theme">
-      <App />
+      <FeedProvider>
+        <App />
+      </FeedProvider>
     </ThemeProvider>
   </StrictMode>,
 );
