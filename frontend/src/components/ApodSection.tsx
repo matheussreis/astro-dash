@@ -59,11 +59,8 @@ interface ApoodSectionProps {
 
 export default function ApodSection({ apodData }: ApoodSectionProps) {
   return (
-    <section
-      id="apod"
-      className="w-full flex justify-center px-6 md:px-12 xl:px-24 2xl:px-32 py-8 md:py-12"
-    >
-      <div className="w-full max-w-400 flex flex-col items-center md:items-stretch md:flex-row gap-8 md:gap-12">
+    <section className="w-full flex justify-center px-6 md:px-12 xl:px-24 2xl:px-32 py-8 md:py-12">
+      <div className="w-full flex flex-col items-center md:items-stretch md:flex-row gap-8 md:gap-12">
         <MediaDisplay mediaSrc={apodData.cover} />
         <Heading title={apodData.title} description={apodData.description} />
       </div>
