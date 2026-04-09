@@ -12,7 +12,7 @@ function Heading() {
     <header className="max-w-3xl text-center flex flex-col gap-8 items-center">
       <div className="flex flex-col gap-6">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground text-balance">
-          Explore the Universe on Any Day
+          This Day in the Cosmos
         </h1>
         <p className="text-xl md:text-2xl text-primary-foreground/80 text-pretty">
           Pick a date to see the cosmic image of the day and discover objects
