@@ -11,11 +11,11 @@ import type { KpiDataItem } from './types';
 const getKpiItems = (neoData: Neo): KpiDataItem[] => {
   return [
     {
-      label: 'Total',
+      label: 'Total objects',
       value: neoData.length,
     },
     {
-      label: 'Hazardous',
+      label: 'Potentially hazardous',
       value: getHazardousNeos(neoData).length,
       format: 'hazardousHighlight',
     },
@@ -25,7 +25,7 @@ const getKpiItems = (neoData: Neo): KpiDataItem[] => {
       format: 'velocityInKmH',
     },
     {
-      label: 'Closest to Earth',
+      label: 'Closest Object to Approach',
       value: getClosestNeo(neoData)?.title || 'N/A',
     },
   ];
