@@ -7,9 +7,9 @@ export default function Navbar() {
   return (
     <header className="h-15 w-full sticky top-0 bg-background select-none">
       <nav className="flex h-15 items-center justify-between px-4 md:px-6">
-        <span>
+        <Button variant="ghost" onClick={scrollToTop} className="p-0 m-0">
           <img src="/src/assets/images/logo.png" alt="Logo" className="h-12" />
-        </span>
+        </Button>
         <span className="flex flex-row items-center justify-center gap-2">
           <Button variant="outline" onClick={scrollToTop}>
             Scroll to Top
