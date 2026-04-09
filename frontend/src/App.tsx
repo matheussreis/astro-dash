@@ -1,8 +1,8 @@
 import Navbar from './components/Navbar';
 import { useFeed } from '@/hooks/use-feed';
-import HeroSection from './components/HeroSection';
-import ApodSection from './components/ApodSection';
-import NeoSection from './components/NeoSection';
+import HeroSection from './components/sections/HeroSection';
+import ApodSection from './components/sections/ApodSection';
+import NeoSection from './components/sections/neo/NeoSection';
 
 export default function App() {
   const { feed, load } = useFeed();
