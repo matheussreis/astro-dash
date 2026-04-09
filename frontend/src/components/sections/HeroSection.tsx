@@ -23,12 +23,18 @@ function Heading() {
   );
 }
 
-function ExploreButton({ onClick }: { onClick: () => void }) {
+interface ExploreButtonProps {
+  onClick: () => void;
+  disabled: boolean;
+}
+
+function ExploreButton({ onClick, disabled }: ExploreButtonProps) {
   return (
     <Button
       size="lg"
       variant="secondary"
       className="gap-2 p-6"
+      disabled={disabled}
       onClick={onClick}
     >
       <Rocket className="text-amber-600" fontWeight="extrabold" />
@@ -43,14 +49,17 @@ interface HeroSectionProps {
 
 export default function HeroSection({ loadFeed }: HeroSectionProps) {
   const [date, setDate] = useState<Date>(new Date());
+  const [exploreButtonDisabled, setExploreButtonDisabled] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const scrolltoSection = useScroll({ ref: sectionRef });
 
   const handleExploreButtonClick = async () => {
     toast.promise(
       async () => {
+        setExploreButtonDisabled(true);
         await loadFeed(date);
         scrolltoSection();
+        setExploreButtonDisabled(false);
       },
       {
         loading: 'Loading feed data...',
@@ -68,7 +77,10 @@ export default function HeroSection({ loadFeed }: HeroSectionProps) {
       <Toaster />
       <Heading />
       <DatePicker value={date} onChange={(value: Date) => setDate(value)} />
-      <ExploreButton onClick={handleExploreButtonClick} />
+      <ExploreButton
+        onClick={handleExploreButtonClick}
+        disabled={exploreButtonDisabled}
+      />
     </section>
   );
 }
