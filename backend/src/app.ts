@@ -9,15 +9,15 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-app.use(limiter);
+app.use(corsMiddleware);
 
 app.use(helmet());
+
+app.use(limiter);
 
 app.use(compression());
 
 app.use(express.json());
-
-app.use(corsMiddleware);
 
 app.use('/api/feed', FeedRouter);
 
