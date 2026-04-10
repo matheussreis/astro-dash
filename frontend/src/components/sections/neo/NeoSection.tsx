@@ -1,13 +1,14 @@
-import type { Neo } from '@/models';
 import {
-  getAverageVelocity,
   getClosestNeo,
   getHazardousNeos,
+  getAverageVelocity,
 } from '@/lib/feed';
+import NeoTable from './NeoTable';
+import type { Neo } from '@/models';
 import NeoKpiItem from './NeoKpiItem';
 import type { KpiDataItem } from './types';
-import { FastestObjects, VelocityVsMissDistance } from './NeoCharts';
 import { formatDate } from '@/lib/formatters';
+import { FastestObjects, VelocityVsMissDistance } from './NeoCharts';
 
 const getKpiItems = (neoData: Neo): KpiDataItem[] => {
   return [
@@ -75,6 +76,9 @@ export default function NeoSection({ neoData, date }: NeoSectionProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FastestObjects neo={neoData} />
         <VelocityVsMissDistance neo={neoData} />
+      </div>
+      <div>
+        <NeoTable neo={neoData} />
       </div>
     </section>
   );
