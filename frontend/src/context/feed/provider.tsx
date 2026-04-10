@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { Feed } from '@/models/feed';
 import { getDatabaseDate } from '@/lib/formatters';
 import { defaultValue, FeedContext } from './context';
@@ -9,12 +9,13 @@ const apiUrl = import.meta.env.VITE_SERVER_URL;
 export function FeedProvider({ children }: { children: React.ReactNode }) {
   const [feed, setFeed] = useState<Feed>(defaultValue);
 
-  const loadFeed = async (date: Date) => {
+  const loadFeed = useCallback(async (date: Date) => {
     const parsedDate = getDatabaseDate(date);
     if (!parsedDate) {
       throw new Error('Invalid date provided');
     }
 
+    setFeed(defaultValue);
     const cached = findCachedFeed(parsedDate);
     if (cached) {
       setFeed(cached);
@@ -33,7 +34,7 @@ export function FeedProvider({ children }: { children: React.ReactNode }) {
 
     setFeed(data);
     setCachedFeed(data);
-  };
+  }, []);
 
   return (
     <FeedContext.Provider value={{ feed: feed, load: loadFeed }}>
