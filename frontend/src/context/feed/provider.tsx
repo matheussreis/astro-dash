@@ -9,7 +9,7 @@ const apiUrl = import.meta.env.VITE_SERVER_URL;
 export function FeedProvider({ children }: { children: React.ReactNode }) {
   const [feed, setFeed] = useState<Feed>(defaultValue);
 
-  const loadFeed = useCallback(async (date: Date) => {
+  const loadFeed = useCallback(async (date: Date, onComplete?: () => void) => {
     const parsedDate = getDatabaseDate(date);
     if (!parsedDate) {
       throw new Error('Invalid date provided');
@@ -19,6 +19,7 @@ export function FeedProvider({ children }: { children: React.ReactNode }) {
     const cached = findCachedFeed(parsedDate);
     if (cached) {
       setFeed(cached);
+      onComplete?.();
       return;
     }
 
@@ -34,6 +35,7 @@ export function FeedProvider({ children }: { children: React.ReactNode }) {
 
     setFeed(data);
     setCachedFeed(data);
+    onComplete?.();
   }, []);
 
   return (

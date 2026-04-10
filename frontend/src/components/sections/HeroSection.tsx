@@ -60,8 +60,9 @@ export default function HeroSection({ loadFeed }: HeroSectionProps) {
     toast.promise(
       async () => {
         setExploreButtonDisabled(true);
-        await loadFeed(date);
-        requestAnimationFrame(() => scrolltoSection());
+        await loadFeed(date, () =>
+          requestAnimationFrame(() => scrolltoSection()),
+        );
         setExploreButtonDisabled(false);
       },
       {
