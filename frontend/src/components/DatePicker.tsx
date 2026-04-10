@@ -5,13 +5,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { Calendar } from '@/components/ui/Calendar';
+import { Calendar, CalendarDayButton } from '@/components/ui/Calendar';
 import { formatDate } from '@/lib/formatters';
 import { cn } from '@/lib/utils';
+import type { DayButtonProps } from 'react-day-picker';
 
 interface DatePickerProps {
   value: Date;
   onChange: (newValue: Date) => void;
+}
+
+function DayButton({ day, modifiers, ...props }: DayButtonProps) {
+  const isFuture = modifiers.disabled && day.date > new Date();
+  return (
+    <CalendarDayButton
+      day={day}
+      modifiers={modifiers}
+      title={isFuture ? 'Future dates are not available' : undefined}
+      {...props}
+    />
+  );
 }
 
 export default function DatePicker({ value, onChange }: DatePickerProps) {
@@ -40,6 +53,9 @@ export default function DatePicker({ value, onChange }: DatePickerProps) {
           timeZone="UTC"
           selected={value}
           onSelect={(newDate) => newDate && onChange(newDate)}
+          disabled={(date) => date > new Date()}
+          captionLayout="dropdown"
+          components={{ DayButton }}
           autoFocus
         />
       </PopoverContent>
