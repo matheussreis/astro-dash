@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main className="grow min-h-[calc(100vh-3.75rem)] bg-primary p-6">
+      <main className="grow min-h-[calc(100vh-3.75rem)] bg-background">
         <HeroSection loadFeed={load} />
         {feed.items?.apod && <ApodSection apodData={feed.items.apod} />}
         {feed.items?.neo && (

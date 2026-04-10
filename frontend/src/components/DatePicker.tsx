@@ -26,7 +26,7 @@ export default function DatePicker({ value, onChange }: DatePickerProps) {
             'bg-secondary dark:bg-secondary',
             'text-secondary-foreground dark:text-secondary-foreground',
             'hover:bg-secondary/90 dark:hover:bg-secondary/90',
-            'p-6 border-none',
+            'p-6 border border-primary/30',
             !value && 'text-muted-foreground/70',
           )}
         >

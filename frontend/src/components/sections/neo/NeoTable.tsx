@@ -34,7 +34,7 @@ function getCells(
   const statusContent = item.isHazardous ? (
     <Badge variant="destructive">Hazardous</Badge>
   ) : (
-    <Badge variant="outline">Safe</Badge>
+    <Badge>Safe</Badge>
   );
 
   return [
@@ -52,7 +52,7 @@ function getCells(
 
 export default function NeoTable({ neo }: NeoTableProps) {
   return (
-    <Card className="dark bg-foreground/5 border border-border text-foreground px-3 py-4 md:px-2 md:py-6">
+    <Card className="bg-card border border-border text-card-foreground px-3 py-4 md:px-2 md:py-6">
       <CardHeader className="pb-1 pt-3 px-3 md:pb-2 md:pt-4 md:px-4">
         <CardTitle className="text-md font-semibold">
           All Near Earth Objects
@@ -63,7 +63,7 @@ export default function NeoTable({ neo }: NeoTableProps) {
           <TableHeader>
             <TableRow className="border-border hover:bg-transparent">
               {HEADERS.map((header) => (
-                <TableHead key={header} className="text-muted-foreground">
+                <TableHead key={header} className="text-foreground">
                   {header}
                 </TableHead>
               ))}

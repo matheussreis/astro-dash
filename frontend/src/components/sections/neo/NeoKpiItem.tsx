@@ -8,9 +8,9 @@ const kpiItemVariants = cva('', {
   variants: {
     variant: {
       default:
-        'bg-white/5 border border-white/10 text-white [&_.title]:text-white',
+        'bg-card border border-border text-card-foreground [&_.title]:text-card-foreground',
       destructive:
-        'bg-gradient-to-br from-red-500/90 to-rose-600 text-white [&_.title]:text-white',
+        'bg-gradient-to-br from-destructive to-destructive/70 text-white [&_.title]:text-white',
     },
     size: {
       sm: 'px-2 py-3',

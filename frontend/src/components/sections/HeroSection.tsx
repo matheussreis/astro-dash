@@ -11,10 +11,10 @@ function Heading() {
   return (
     <header className="max-w-3xl text-center flex flex-col gap-8 items-center">
       <div className="flex flex-col gap-6">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground text-balance">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-secondary-foreground text-balance">
           This Day in the Cosmos
         </h1>
-        <p className="text-xl md:text-2xl text-primary-foreground/80 text-pretty">
+        <p className="text-xl md:text-2xl text-secondary-foreground/70 text-pretty">
           Pick a date to see the cosmic image of the day and discover objects
           passing near Earth at that moment.
         </p>
@@ -32,12 +32,15 @@ function ExploreButton({ onClick, disabled }: ExploreButtonProps) {
   return (
     <Button
       size="lg"
-      variant="secondary"
+      variant="default"
       className="gap-2 p-6"
       disabled={disabled}
       onClick={onClick}
     >
-      <Rocket className="text-amber-600" fontWeight="extrabold" />
+      <Rocket
+        className="text-amber-500 dark:text-amber-300"
+        fontWeight="extrabold"
+      />
       Explore This Date
     </Button>
   );
@@ -72,7 +75,7 @@ export default function HeroSection({ loadFeed }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="min-h-[50vh] md:min-h-[82vh] xl:min-h-screen flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6"
+      className="min-h-[50vh] md:min-h-[82vh] xl:min-h-screen flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6 bg-secondary"
     >
       <Toaster />
       <Heading />

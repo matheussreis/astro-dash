@@ -47,7 +47,7 @@ export default function GenericBarChart({
             offset={-4}
             position="insideBottom"
             fontSize={11}
-            fill="var(--muted-foreground)"
+            fill="var(--foreground)"
           />
         )}
       </XAxis>
@@ -65,7 +65,7 @@ export default function GenericBarChart({
             angle={-90}
             position="insideLeft"
             fontSize={11}
-            fill="var(--muted-foreground)"
+            fill="var(--foreground)"
           />
         )}
       </YAxis>

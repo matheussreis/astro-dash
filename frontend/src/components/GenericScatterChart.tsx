@@ -64,7 +64,7 @@ export default function GenericScatterChart({
             offset={-4}
             position="insideBottom"
             fontSize={11}
-            fill="var(--muted-foreground)"
+            fill="var(--foreground)"
           />
         )}
       </XAxis>
@@ -81,7 +81,7 @@ export default function GenericScatterChart({
             angle={-90}
             position="insideLeft"
             fontSize={11}
-            fill="var(--muted-foreground)"
+            fill="var(--foreground)"
           />
         )}
       </YAxis>
@@ -109,11 +109,10 @@ export default function GenericScatterChart({
         }}
       />
       <Legend
-        wrapperStyle={{
-          fontSize: 12,
-          color: 'var(--foreground)',
-          paddingTop: '2rem',
-        }}
+        wrapperStyle={{ fontSize: 12, paddingTop: '2rem' }}
+        formatter={(value) => (
+          <span style={{ color: 'var(--foreground)' }}>{value}</span>
+        )}
       />
       {datasets.map((dataset, index) => (
         <Scatter
