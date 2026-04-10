@@ -75,7 +75,7 @@ export default function HeroSection({ loadFeed }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="min-h-[50vh] md:min-h-[82vh] xl:min-h-screen flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6 bg-secondary"
+      className="min-h-screen flex-1 flex flex-col items-center justify-center px-6 py-12 gap-6 bg-secondary"
     >
       <Toaster />
       <Heading />
