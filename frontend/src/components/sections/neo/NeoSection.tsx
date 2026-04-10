@@ -40,10 +40,10 @@ interface HeadingProps {
 function Heading({ title, description }: HeadingProps) {
   return (
     <header className="flex-1 min-w-0 flex flex-col justify-center gap-4 md:gap-8 text-center md:text-left">
-      <h1 className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-primary-foreground text-balance leading-tight">
+      <h1 className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-primary-foreground text-balance">
         {title}
       </h1>
-      <p className="text-base md:text-xl xl:text-2xl text-primary-foreground/80 text-pretty leading-relaxed">
+      <p className="text-sm md:text-base xl:text-xl text-primary-foreground/80 text-pretty leading-loose">
         {description}
       </p>
     </header>

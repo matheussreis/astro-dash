@@ -42,11 +42,11 @@ interface HeadingProps {
 
 function Heading({ title, description }: HeadingProps) {
   return (
-    <header className="flex-1 min-w-0 flex flex-col justify-center gap-8 text-center md:text-left">
-      <h1 className="text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-primary-foreground text-balance leading-tight">
+    <header className="flex-1 min-w-0 flex flex-col justify-center gap-4 text-center md:text-left">
+      <h1 className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-primary-foreground text-balance">
         {title}
       </h1>
-      <p className="text-lg md:text-xl xl:text-2xl text-primary-foreground/80 text-pretty leading-relaxed">
+      <p className="text-sm md:text-base xl:text-xl text-primary-foreground/80 text-pretty leading-loose">
         {description}
       </p>
     </header>
@@ -60,7 +60,7 @@ interface ApoodSectionProps {
 export default function ApodSection({ apodData }: ApoodSectionProps) {
   return (
     <section className="w-full flex justify-center px-6 md:px-12 xl:px-24 2xl:px-32 py-8 md:py-12">
-      <div className="w-full flex flex-col items-center md:items-stretch md:flex-row gap-8 md:gap-12">
+      <div className="w-full flex flex-col items-center md:items-stretch md:flex-row gap-6 md:gap-8">
         <MediaDisplay mediaSrc={apodData.cover} />
         <Heading title={apodData.title} description={apodData.description} />
       </div>
