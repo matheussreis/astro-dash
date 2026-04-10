@@ -21,3 +21,7 @@ export function getClosestNeo(neo: Neo): NeoItem | null {
     item.missDistance < closest.missDistance ? item : closest,
   );
 }
+
+export function getFastestNeos(neo: Neo, count: number = 5): Neo {
+  return [...neo].sort((a, b) => b.velocity - a.velocity).slice(0, count);
+}
