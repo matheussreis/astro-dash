@@ -58,7 +58,7 @@ export default function HeroSection({ loadFeed }: HeroSectionProps) {
       async () => {
         setExploreButtonDisabled(true);
         await loadFeed(date);
-        scrolltoSection();
+        requestAnimationFrame(() => scrolltoSection());
         setExploreButtonDisabled(false);
       },
       {
