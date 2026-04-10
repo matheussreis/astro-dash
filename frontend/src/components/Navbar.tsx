@@ -5,7 +5,7 @@ export default function Navbar() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <header className="h-15 w-full sticky top-0 z-50 bg-primary-foreground select-none">
+    <header className="h-15 w-full fixed top-0 left-0 right-0 z-50 bg-primary-foreground select-none">
       <nav className="flex h-15 items-center justify-between px-4 md:px-6">
         <Button variant="ghost" onClick={scrollToTop} className="p-0 m-0">
           <img src="/src/assets/images/logo.png" alt="Logo" className="h-12" />
