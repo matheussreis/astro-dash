@@ -25,3 +25,20 @@ export function getClosestNeo(neo: Neo): NeoItem | null {
 export function getFastestNeos(neo: Neo, count: number = 5): Neo {
   return [...neo].sort((a, b) => b.velocity - a.velocity).slice(0, count);
 }
+
+export function groupNeosByHazard(neo: Neo): Record<'safe' | 'hazardous', Neo> {
+  const items: Record<'safe' | 'hazardous', Neo> = {
+    safe: [],
+    hazardous: [],
+  };
+
+  for (const NeoItem of neo) {
+    if (NeoItem.isHazardous) {
+      items.hazardous.push(NeoItem);
+    } else {
+      items.safe.push(NeoItem);
+    }
+  }
+
+  return { ...items };
+}

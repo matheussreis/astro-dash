@@ -6,7 +6,7 @@ import {
 } from '@/lib/feed';
 import NeoKpiItem from './NeoKpiItem';
 import type { KpiDataItem } from './types';
-import { FastestObjects } from './NeoCharts';
+import { FastestObjects, VelocityVsMissDistance } from './NeoCharts';
 import { formatDate } from '@/lib/formatters';
 
 const getKpiItems = (neoData: Neo): KpiDataItem[] => {
@@ -74,6 +74,7 @@ export default function NeoSection({ neoData, date }: NeoSectionProps) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FastestObjects neo={neoData} />
+        <VelocityVsMissDistance neo={neoData} />
       </div>
     </section>
   );
