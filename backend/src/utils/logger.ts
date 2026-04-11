@@ -5,14 +5,10 @@ const customFormat = winston.format.printf(({ timestamp, level, message }) => {
   return `[${timestamp}] ${level} : ${message}`;
 });
 
-const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
-  format: winston.format.combine(
-    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    customFormat,
-  ),
-  transports: [
-    new winston.transports.Console(),
+const transports: winston.transport[] = [new winston.transports.Console()];
+
+if (!process.env.VERCEL) {
+  transports.push(
     new winston.transports.DailyRotateFile({
       filename: 'logs/error-%DATE%.log',
       datePattern: 'YYYY-MM-DD',
@@ -23,7 +19,16 @@ const logger = winston.createLogger({
       datePattern: 'YYYY-MM-DD',
       level: 'info',
     }),
-  ],
+  );
+}
+
+const logger = winston.createLogger({
+  level: process.env.LOG_LEVEL || 'info',
+  format: winston.format.combine(
+    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+    customFormat,
+  ),
+  transports,
 });
 
 export default logger;
