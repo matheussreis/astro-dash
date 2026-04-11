@@ -16,6 +16,7 @@ This project is a simple tool that integrates NASA's APOD (Astronomy Picture of 
 - [Environment Variables](#environment-variables)
 - [Installation](#installation)
 - [Running the Project](#running-the-project)
+- [Using the Application](#using-the-application)
 
 ## Prerequisites
 
@@ -77,3 +78,25 @@ cd frontend && npm run dev
 ```
 
 The frontend will be available at `http://localhost:5173` and will proxy API requests to the backend at the port defined in your `.env`.
+
+## Using the Application
+
+Despite the slightly complex backend setup involving CORS and rate limiting, the user interface is straightforward. To get started, open the URL above and you'll land on the hero section.
+
+This project uses page sections instead of separate URL-based routes, which keeps the setup simpler and requires less configuration.
+
+In the hero section, you'll find a date picker and a button. Select any date up to today (future dates are not allowed) and press the button with the rocket icon.
+
+When you press that button, the frontend first checks whether that query has been made before. If it has, the cached result is returned from local storage (the 10 most recent requests are stored there). Otherwise, the frontend sends a request to the backend to fetch the "feed". The feed is a single response that bundles everything the backend currently retrieves from the NASA API. This design makes it straightforward to add new API integrations in the future.
+
+While the request is in progress, a small notification appears in the bottom-right corner of the screen. Once the API responds with either data or an error, the notification updates and then fades away.
+
+Once the data is fetched, it is added to the cache if not already present, and the page populates with results. The view then automatically scrolls down to the first content section.
+
+The application currently integrates two NASA APIs:
+
+- **APOD (Astronomy Picture of the Day):** Displays a photo or video along with a description. This API has strict rate limits and can occasionally time out. If that happens, the section is simply not rendered.
+
+- **NEO (Near Earth Objects):** Shows key metrics about near-Earth objects for the selected date, followed by two charts. One compares the top 5 fastest objects and the other plots the velocity versus miss distance for all returned objects. A full data table is displayed at the bottom of this section.
+
+You can also switch the application's theme at any time. The default is light mode, with dark and system (which follows your OS preference) available as alternatives.
