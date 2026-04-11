@@ -2,10 +2,14 @@ import cors from 'cors';
 import logger from '../utils/logger.js';
 import { clientConfig } from '../config/index.js';
 import type { NextFunction, Request, Response } from 'express';
+import { makeUrlParser } from '../utils/factories.js';
+
+const parser = makeUrlParser();
+const allowedOrigin = parser.parse({ baseUrl: clientConfig.url });
 
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
-    if (!origin || origin === clientConfig.url) {
+    if (!origin || origin === allowedOrigin) {
       callback(null, true);
       return;
     }
