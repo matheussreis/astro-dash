@@ -9,7 +9,7 @@ const allowedOrigin = parser.parse({ baseUrl: clientConfig.url });
 
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
-    if (!origin || origin === allowedOrigin) {
+    if (origin === allowedOrigin) {
       callback(null, true);
       return;
     }
