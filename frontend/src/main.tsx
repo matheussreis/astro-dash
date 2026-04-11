@@ -7,7 +7,7 @@ import { FeedProvider } from './context/feed/provider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="astro-dash-theme">
+    <ThemeProvider defaultTheme="light" storageKey="astro-dash-theme">
       <FeedProvider>
         <App />
       </FeedProvider>
