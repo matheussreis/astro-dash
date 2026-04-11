@@ -5,7 +5,7 @@ import type { NextFunction, Request, Response } from 'express';
 
 export const corsMiddleware = cors({
   origin: (origin, callback) => {
-    if (origin === clientConfig.url) {
+    if (!origin || origin === clientConfig.url) {
       callback(null, true);
       return;
     }

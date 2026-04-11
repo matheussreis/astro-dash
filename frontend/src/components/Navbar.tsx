@@ -1,5 +1,6 @@
 import { Button } from './ui/Button';
 import { ModeToggle } from './ModeToggle';
+import logo from '../assets/images/logo.png';
 
 export default function Navbar() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -8,7 +9,7 @@ export default function Navbar() {
     <header className="h-15 w-full fixed top-0 left-0 right-0 z-50 bg-primary-foreground select-none">
       <nav className="flex h-15 items-center justify-between px-4 md:px-6">
         <Button variant="ghost" onClick={scrollToTop} className="p-0 m-0">
-          <img src="/src/assets/images/logo.png" alt="Logo" className="h-12" />
+          <img src={logo} alt="Logo" className="h-12" />
         </Button>
         <span className="flex flex-row items-center justify-center gap-2">
           <Button variant="outline" onClick={scrollToTop}>
