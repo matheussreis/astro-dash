@@ -87,7 +87,7 @@ This project uses page sections instead of separate URL-based routes, which keep
 
 In the hero section, you'll find a date picker and a button. Select any date up to today (future dates are not allowed) and press the button with the rocket icon.
 
-When you press that button, the frontend first checks whether that query has been made before. If it has, the cached result is returned from local storage (the 10 most recent requests are stored there). Otherwise, the frontend sends a request to the backend to fetch the "feed". The feed is a single response that bundles everything the backend currently retrieves from the NASA API. This design makes it straightforward to add new API integrations in the future.
+When you press that button, the frontend first checks whether that query has been made before. If it has, the cached result is returned from local storage (the 20 most recent requests are stored there). Otherwise, the frontend sends a request to the backend to fetch the "feed". The feed is a single response that bundles everything the backend currently retrieves from the NASA API. This design makes it straightforward to add new API integrations in the future.
 
 While the request is in progress, a small notification appears in the bottom-right corner of the screen. Once the API responds with either data or an error, the notification updates and then fades away.
 

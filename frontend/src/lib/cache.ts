@@ -1,7 +1,7 @@
 import type { Feed } from '@/models';
 import { getDatabaseDate } from './formatters';
 
-const MAX_ITEMS = 10;
+const MAX_ITEMS = 20;
 const CACHE_KEY = 'feed-data';
 
 export function getCachedFeeds(): Feed[] {
