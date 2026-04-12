@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -9,6 +10,7 @@ import {
 import { cn } from '@/lib/utils';
 import type { Neo } from '@/models';
 import { Badge } from '@/components/ui/Badge';
+import { Input } from '@/components/ui/Input';
 import { formatVelocity } from '@/lib/formatters';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 
@@ -51,12 +53,28 @@ function getCells(
 }
 
 export default function NeoTable({ neo }: NeoTableProps) {
+  const [search, setSearch] = useState('');
+
+  const filtered = search.trim()
+    ? neo.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase()),
+      )
+    : neo;
+
   return (
     <Card className="bg-card border border-border text-card-foreground px-3 py-4 md:px-2 md:py-6">
       <CardHeader className="pb-1 pt-3 px-3 md:pb-2 md:pt-4 md:px-4">
-        <CardTitle className="text-md font-semibold">
-          All Near Earth Objects
-        </CardTitle>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <CardTitle className="text-md font-semibold">
+            All Near Earth Objects
+          </CardTitle>
+          <Input
+            placeholder="Search by name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="max-w-xs"
+          />
+        </div>
       </CardHeader>
       <CardContent className="px-3 pb-3 md:px-4 md:pb-4">
         <Table>
@@ -70,7 +88,7 @@ export default function NeoTable({ neo }: NeoTableProps) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {neo.map((item) => (
+            {filtered.map((item) => (
               <TableRow
                 key={item.title}
                 className={cn(
